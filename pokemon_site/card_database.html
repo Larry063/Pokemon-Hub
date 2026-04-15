@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            padding: 40px 0 20px;
+            border-bottom: 1px solid #e5e7eb;
+            color: inherit;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-filters {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+        }
+
+        .filter-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-display {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4facfe;
+            transition: all 0.2s;
+        }
+
+        .card-display:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-rarity {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .rarity-common {
+            background-color: #e8d4a0;
+            color: #333;
+        }
+
+        .rarity-uncommon {
+            background-color: #a8a8a8;
+            color: white;
+        }
+
+        .rarity-rare {
+            background-color: #d4a337;
+            color: white;
+        }
+
+        .rarity-holo {
+            background-color: #b21e35;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .sort-options {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 🧱 Block 1: Global Navigation Bar -->
+    <nav class="navbar navbar-expand-lg border-bottom sticky-top global-navbar w-100 bg-white"
+        style="z-index: 100000; position: sticky; top: 0;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                    alt="Pokémon" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pokemonNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pokemonNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pokedex.html">Pokédex</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="card_database.html">Card Database</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="expansion.html">Expansion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="strategy.html">Strategy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="competitive.html">Competitive</a>
+                    </li>
+
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-danger fw-bold rounded-pill px-4">Login</a>
+
+                    <!-- Theme Switch -->
+                    <label class="switch ms-3 mb-0 align-self-center" style="margin-top: 1px;">
+                        <input id="input" type="checkbox" />
+                        <div class="slider round">
+                            <div class="sun-moon">
+                                <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                            </div>
+                            <div class="stars">
+                                <svg id="star-1" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-2" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-3" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-4" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1 class="mb-2">Card Database</h1>
+            <p class="lead mb-0">Explore cards with detailed filters</p>
+            <div id="expansion-info"
+                style="margin-top: 15px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.2);">
+                <small id="expansion-display" style="display:none;">
+                    <strong>Viewing Sets:</strong>
+                    <span id="expansion-tags"></span>
+                    <button id="clear-expansion" class="btn btn-link btn-sm text-white p-0">Clear All</button>
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sidebar-filters">
+                    <div class="filter-group">
+                        <h5 class="filter-title">Search</h5>
+                        <input type="text" id="card-search" class="form-control" placeholder="Search name...">
+                    </div>
+
+                    <div class="filter-group">
+                        <h5 class="filter-title">Card Type</h5>
+                        <div id="type-filters" style="max-height: 200px; overflow-y: auto;">
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Grass" id="f-grass"><label class="form-check-label"
+                                    for="f-grass">Grass</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Fire" id="f-fire"><label class="form-check-label" for="f-fire">Fire</label>
+                            </div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Water" id="f-water"><label class="form-check-label"
+                                    for="f-water">Water</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Lightning" id="f-elec"><label class="form-check-label"
+                                    for="f-elec">Lightning</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Psychic" id="f-psy"><label class="form-check-label"
+                                    for="f-psy">Psychic</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Fighting" id="f-fight"><label class="form-check-label"
+                                    for="f-fight">Fighting</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Darkness" id="f-dark"><label class="form-check-label"
+                                    for="f-dark">Darkness</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Metal" id="f-metal"><label class="form-check-label"
+                                    for="f-metal">Metal</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Fairy" id="f-fairy"><label class="form-check-label"
+                                    for="f-fairy">Fairy</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Dragon" id="f-dragon"><label class="form-check-label"
+                                    for="f-dragon">Dragon</label></div>
+                            <div class="form-check"><input class="form-check-input type-filter" type="checkbox"
+                                    value="Colorless" id="f-colorless"><label class="form-check-label"
+                                    for="f-colorless">Colorless</label></div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5 class="filter-title">Rarity</h5>
+                        <select id="rarity-filter" class="form-select">
+                            <option value="">All Rarities</option>
+                            <option value="Common">Common</option>
+                            <option value="Uncommon">Uncommon</option>
+                            <option value="Rare">Rare</option>
+                            <option value="Rare Holo">Rare Holo</option>
+                            <option value="Rare Ultra">Ultra Rare</option>
+                            <option value="Rare Secret">Secret Rare</option>
+                            <option value="LEGEND">LEGEND</option>
+                            <option value="Promo">Promo</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <h5 class="filter-title">HP Range</h5>
+                        <select id="hp-range" class="form-select">
+                            <option value="">Any HP</option>
+                            <option value="0-50">0-50 HP</option>
+                            <option value="51-100">51-100 HP</option>
+                            <option value="101-150">101-150 HP</option>
+                            <option value="151-999">151+ HP</option>
+                        </select>
+                    </div>
+                    <button id="reset-filters" class="btn btn-outline-secondary w-100">Reset Filters</button>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="sort-options d-flex justify-content-between align-items-center">
+                    <div>
+                        <label class="fw-bold me-2">Sort By:</label>
+                        <select id="sort-by" class="form-select d-inline-block" style="width: auto;">
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="hp-asc">HP (Low to High)</option>
+                            <option value="hp-desc">HP (High to Low)</option>
+                        </select>
+                    </div>
+                    <div id="results-info" class="text-muted">
+                        <span id="results-count">0</span> cards found
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <button id="prev-page" class="btn btn-sm btn-secondary">Previous</button>
+                    <div class="d-flex align-items-center">
+                        <span id="page-info" class="me-2">Page 1</span>
+                        <div class="input-group input-group-sm" style="width: 160px;">
+                            <span class="input-group-text">Go Page :</span>
+                            <input type="number" id="jump-page" class="form-control" min="1" placeholder="Num">
+                        </div>
+                    </div>
+                    <button id="next-page" class="btn btn-sm btn-secondary">Next</button>
+                </div>
+
+                <div id="cards-grid" class="row"></div>
+                <div id="empty-state" class="text-center py-5 d-none">
+                    <h3>No Cards Found</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        let allCards = [];
+        let currentPage = 1;
+        const pageSize = 40;
+
+        $(document).ready(function () {
+            loadPage();
+
+            $('#card-search, #hp-range, #rarity-filter').on('keyup change', () => { currentPage = 1; loadPage(); });
+            $('.type-filter').on('change', () => { currentPage = 1; loadPage(); });
+            $('#sort-by').on('change', displayCards);
+            $('#prev-page').on('click', () => { if (currentPage > 1) { currentPage--; loadPage(); } });
+            $('#next-page').on('click', () => { currentPage++; loadPage(); });
+
+            $('#clear-expansion').on('click', function () {
+                localStorage.removeItem("selectedExpansions");
+                updateExpansionDisplay();
+                loadPage();
+            });
+
+            $('#reset-filters').on('click', function () {
+                $('#card-search, #hp-range, #rarity-filter').val(''); // Added rarity reset
+                $('.type-filter').prop('checked', false);
+                currentPage = 1;
+                loadPage();
+            });
+
+            // Listen for "Enter" key or change on the jump input
+            $('#jump-page').on('keypress change', function (e) {
+                if (e.which == 13 || e.type === 'change') { // 13 is the Enter key
+                    const pageNum = parseInt($(this).val());
+                    const maxPage = Math.ceil(parseInt($('#results-count').text()) / pageSize);
+
+                    if (pageNum > 0 && pageNum <= maxPage) {
+                        currentPage = pageNum;
+                        loadPage();
+                        $(this).val(''); // Clear input after jump
+                    } else if (pageNum > maxPage) {
+                        alert(`Max page is ${maxPage}`);
+                        $(this).val(maxPage);
+                    }
+                }
+            });
+        });
+
+        function loadPage() {
+            const selectedSets = JSON.parse(localStorage.getItem("selectedExpansions")) || [];
+            const searchTerm = $('#card-search').val().trim();
+            const selectedTypes = $('.type-filter:checked').map(function () { return `types:"${$(this).val()}"`; }).get();
+            const hpRange = $('#hp-range').val();
+            const rarity = $('#rarity-filter').val();
+
+            let queryParts = [];
+            if (selectedSets.length) queryParts.push("(" + selectedSets.map(s => `set.id:"${s.id}"`).join(" OR ") + ")");
+            if (searchTerm) queryParts.push(`name:"*${searchTerm}*"`);
+            if (selectedTypes.length) queryParts.push(`(${selectedTypes.join(" OR ")})`);
+            if (hpRange) queryParts.push(`hp:[${hpRange.split('-')[0]} TO ${hpRange.split('-')[1]}]`);
+            if (rarity) queryParts.push(`rarity:"${rarity}"`);
+
+            let url = `https://api.pokemontcg.io/v2/cards?pageSize=${pageSize}&page=${currentPage}`;
+            if (queryParts.length) url += `&q=${encodeURIComponent(queryParts.join(" "))}`;
+
+            updateExpansionDisplay();
+
+            // Show loading state, clear old results
+            $('#cards-grid').html('<div class="col-12 text-center py-5"><div class="spinner-border text-primary" role="status"></div><p class="mt-2 text-muted">Loading cards...</p></div>');
+            $('#empty-state').addClass('d-none');
+            $('#prev-page, #next-page').prop('disabled', true);
+
+            $.get(url, function (res) {
+                allCards = res.data || [];
+                const totalCount = res.totalCount || 0;
+                const maxPage = Math.ceil(totalCount / pageSize) || 1;
+
+                $('#results-count').text(totalCount);
+                $('#page-info').text(`Page ${currentPage} of ${maxPage}`);
+                $('#jump-page').attr('max', maxPage);
+                $('#prev-page').prop('disabled', currentPage === 1);
+                $('#next-page').prop('disabled', !totalCount || currentPage * pageSize >= totalCount);
+
+                displayCards();
+            }).fail(function (xhr, status, error) {
+                $('#cards-grid').html('');
+                $('#empty-state').removeClass('d-none').html(
+                    '<h3 class="text-danger">Failed to load cards</h3><p class="text-muted">API error: ' + (error || status) + '</p><p class="small text-muted">URL: ' + url + '</p>'
+                );
+                $('#results-count').text(0);
+                $('#prev-page, #next-page').prop('disabled', true);
+            });
+        }
+
+        function displayCards() {
+            const sortBy = $('#sort-by').val();
+            allCards.sort((a, b) => {
+                if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
+                if (sortBy === 'name-desc') return b.name.localeCompare(a.name);
+                if (sortBy === 'hp-asc') return (parseInt(a.hp) || 0) - (parseInt(b.hp) || 0);
+                return (parseInt(b.hp) || 0) - (parseInt(a.hp) || 0);
+            });
+
+            const html = allCards.map(card => {
+                // Dynamic class selection for rarity styling
+                let rarityClass = 'rarity-common';
+                const r = (card.rarity || '').toLowerCase();
+                if (r.includes('uncommon')) rarityClass = 'rarity-uncommon';
+                else if (r.includes('holo')) rarityClass = 'rarity-holo';
+                else if (r.includes('rare')) rarityClass = 'rarity-rare';
+
+                return `
+            <div class="col-md-4 mb-4">
+                <div class="card-display h-100">
+                    <img src="${card.images.small}" class="img-fluid mb-2" alt="${card.name}">
+                    <h6 class="fw-bold mb-1">${card.name}</h6>
+                    <p class="small text-muted mb-1">HP: ${card.hp || 'N/A'} | ${card.types?.join(', ') || 'No Type'}</p>
+                    <span class="card-rarity ${rarityClass}">${card.rarity || 'Common'}</span>
+                </div>
+            </div>
+        `;
+            }).join('');
+
+            $('#cards-grid').html(html);
+            $('#empty-state').toggleClass('d-none', allCards.length > 0);
+        }
+
+        function updateExpansionDisplay() {
+            const selectedSets = JSON.parse(localStorage.getItem("selectedExpansions")) || [];
+            if (selectedSets.length > 0) {
+                $('#expansion-display').show();
+                $('#expansion-tags').html(selectedSets.map(s => `<span class="expansion-tag">${s.name}</span>`).join(''));
+            } else {
+                $('#expansion-display').hide();
+            }
+        }
+    </script>
+    <!-- Official Pokemon Footer -->
+    <footer class="mt-5">
+        <div class="bg-pokemon-darker py-5">
+            <div class="container">
+                <div class="row position-relative">
+                    <!-- Left: Company Links -->
+                    <div class="col-md-3 mb-4 mb-md-0 border-end border-secondary border-opacity-25 pe-md-4">
+                        <h4 class="text-white fw-bold mb-4">The Pokémon Company</h4>
+                        <ul class="list-unstyled mb-0 pkmn-footer-links">
+                            <li class="mb-2"><a href="news.html">News</a></li>
+                            <li class="mb-2"><a href="#">Parents Guide</a></li>
+                            <li class="mb-2"><a href="#">Customer Service</a></li>
+                            <li class="mb-2"><a href="#">About Our Company</a></li>
+                            <li class="mb-2"><a href="#">Careers</a></li>
+                            <li class="mb-2"><a href="#">Select a Country/Region</a></li>
+                            <li><a href="#">Press Site</a></li>
+                        </ul>
+                    </div>
+                    <!-- Middle: Social Icons -->
+                    <div class="col-md-4 mb-4 mb-md-0 px-md-4">
+                        <div class="d-flex gap-2 mb-4">
+                            <a href="https://facebook.com/Pokemon" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                                    alt="Facebook"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </a>
+                            <a href="https://www.youtube.com/@pokemon" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                                    alt="YouTube"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </a>
+                            <a href="https://x.com/PokemonTCG" target="_blank" class="social-icon text-decoration-none"
+                                style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg"
+                                    alt="X (formerly Twitter)"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </a>
+                            <a href="https://www.instagram.com/pokemontcg/" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                                    alt="Instagram"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </a>
+                            <a href="https://www.pokemon.com/us" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg"
+                                    alt="Official Website"
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Right: Badges & Legal -->
+                    <div class="col-md-5 border-start border-secondary border-opacity-25 ps-md-4">
+                        <ul class="list-unstyled mb-4 text-white small legal-links">
+                            <li class="mb-1"><a href="#" class="text-white text-decoration-none hover-underline">Terms
+                                    of Use</a></li>
+                            <li class="mb-1"><a href="#" class="text-white text-decoration-none hover-underline">Privacy
+                                    Notice</a></li>
+                            <li class="mb-1"><a href="#" class="text-white text-decoration-none hover-underline">Cookie
+                                    Page</a></li>
+                            <li class="mb-1"><a href="#" class="text-white text-decoration-none hover-underline">Legal
+                                    Info</a></li>
+                            <li><a href="#" class="text-white text-decoration-none hover-underline">Security</a></li>
+                        </ul>
+                        <p class="text-secondary small mb-0 lh-sm">
+                            &copy;2026 Pokémon. &copy;1995 - 2026 Nintendo/Creatures Inc./GAME FREAK inc. TM,
+                            &reg;Nintendo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/navbar.js"></script>
+</body>
+
+</html>

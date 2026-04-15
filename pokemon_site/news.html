@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon hub</title>
+    <meta name="description" content="Latest Pokémon TCG news, announcements, and updates from around the world.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .news-page-header {
+            padding: 48px 0 26px;
+            margin-bottom: 0;
+            border-bottom: 1px solid #e5e7eb;
+            color: inherit;
+        }
+
+        .news-page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .news-page-header p {
+            opacity: 0.88;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg border-bottom sticky-top global-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                    alt="Pokémon" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pokemonNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pokemonNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pokedex.html">Pokédex</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="card_database.html">Card Database</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="expansion.html">Expansion</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="strategy.html">Strategy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="competitive.html">Competitive</a>
+                    </li>
+
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-danger fw-bold rounded-pill px-4">Login</a>
+
+                    <label class="switch ms-3 mb-0 align-self-center" style="margin-top: 1px;">
+                        <input id="input" type="checkbox" />
+                        <div class="slider round">
+                            <div class="sun-moon">
+                                <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                            </div>
+                            <div class="stars">
+                                <svg id="star-1" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-2" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-3" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-4" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="news-page-header">
+        <div class="container">
+            <h1>Pokémon News</h1>
+            <p>Latest TCG announcements, set reveals, tournament updates & more</p>
+        </div>
+    </div>
+
+    <section id="hero-carousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner" id="carousel-inner-content">
+            <div class="carousel-item active">
+                <div class="d-flex justify-content-center align-items-center bg-dark"
+                    style="height: 60vh; min-height: 400px;">
+                    <div class="spinner-border text-light" role="status"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+        <div class="carousel-indicators" id="carousel-indicators-content"></div>
+    </section>
+
+    <main class="container mt-4">
+        <div class="row g-3 scroll-reveal" id="news-container">
+            <div class="col-12 text-center py-5 text-muted">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted fw-medium">Loading latest news...</p>
+            </div>
+        </div>
+
+        <div class="row mt-4 mb-5">
+            <div class="col-12 text-center">
+                <button id="load-more-news-btn" class="btn btn-outline-danger btn-lg px-5 fw-bold rounded-pill"
+                    style="display: none;">
+                    Load More News
+                    <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-5">
+        <div class="bg-pokemon-darker py-5">
+            <div class="container">
+                <div class="row position-relative">
+                    <div class="col-md-3 mb-4 mb-md-0 border-end border-secondary border-opacity-25 pe-md-4">
+                        <h4 class="text-white fw-bold mb-4">The Pokémon Company</h4>
+                        <ul class="list-unstyled mb-0 pkmn-footer-links">
+                            <li class="mb-2"><a href="news.html">News</a></li>
+                            <li class="mb-2"><a href="#">Parents Guide</a></li>
+                            <li class="mb-2"><a href="#">Customer Service</a></li>
+                            <li class="mb-2"><a href="#">About Our Company</a></li>
+                            <li class="mb-2"><a href="#">Careers</a></li>
+                            <li><a href="#">Press Site</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 mb-4 mb-md-0 px-md-4">
+                        <div class="d-flex gap-2 mb-4">
+                            <a href="https://facebook.com/Pokemon" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg"
+                                    alt="Facebook" style="width:100%;height:100%;object-fit:contain;border-radius:8px;">
+                            </a>
+                            <a href="https://www.youtube.com/@pokemon" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                                    alt="YouTube" style="width:100%;height:100%;object-fit:contain;border-radius:8px;">
+                            </a>
+                            <a href="https://x.com/PokemonTCG" target="_blank" class="social-icon text-decoration-none"
+                                style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" alt="X"
+                                    style="width:100%;height:100%;object-fit:contain;border-radius:8px;">
+                            </a>
+                            <a href="https://www.instagram.com/pokemontcg/" target="_blank"
+                                class="social-icon text-decoration-none" style="background: transparent;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                                    alt="Instagram"
+                                    style="width:100%;height:100%;object-fit:contain;border-radius:8px;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 border-start border-secondary border-opacity-25 ps-md-4">
+                        <p class="text-secondary small mb-0 lh-sm">
+                            &copy;2026 Pokémon. &copy;1995 - 2026 Nintendo/Creatures Inc./GAME FREAK inc. TM,
+                            &reg;Nintendo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let currentNewsPage = 1;
+        // REPLACE THE STRING BELOW WITH YOUR ACTUAL GNEWS API KEY
+        const newsApiKey = "0f7810bf9a812f3520f7db1612ea62a4";
+
+        const fallbackArticles = [
+            {
+                title: "Paradox Destiny: The New TCG Expansion Set Revealed",
+                description: "The Pokémon Company has officially announced 'Paradox Destiny', featuring Ancient and Future versions of legendary favorites. Coming this autumn.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1620025983804-b26aeb857508?q=80&w=2671&auto=format&fit=crop"
+            },
+            {
+                title: "Global Tournament Finals: Highlights from the Regional Qualifiers",
+                description: "Top trainers from around the world gathered this weekend to compete for the Master's Cup. See the winning deck lists here.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop"
+            },
+            {
+                title: "Collector's Corner: The Rarest Charizard Cards in History",
+                description: "Explore the evolution of Charizard in the Trading Card Game, from Base Set to the latest high-tech special illustrations.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+            },
+            {
+                title: "New Shiny Vault Collection Coming to Pokémon Hub Shop",
+                description: "A first look at the upcoming Shiny Vault release, featuring stunning holographic portraits of fan-favorite starters.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2671&auto=format&fit=crop"
+            },
+            {
+                title: "Advanced Strategy: Mastering the Ancient TCG Meta",
+                description: "Pro players discuss how Ancient Pokémon are changing the competitive landscape in the current tournament season.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2670&auto=format&fit=crop"
+            },
+            {
+                title: "Pokémon Hub Exclusive: Interview with TCG Lead Designer",
+                description: "We sat down with the creators behind the cards to talk about the future of the game and upcoming mechanics.",
+                url: "#",
+                urlToImage: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop"
+            }
+        ];
+
+        const getSafeText = (text, maxLength) => {
+            if (!text) return "Pokémon News update...";
+            return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+        };
+
+        function renderArticles(articles, append = false) {
+            if (!append) {
+                $('#news-container').empty();
+                $('#carousel-inner-content').empty();
+                $('#carousel-indicators-content').empty();
+            }
+
+            if (!append) {
+                const carouselArticles = articles.slice(0, 3);
+                let carouselHtml = '';
+                let indicatorsHtml = '';
+
+                carouselArticles.forEach((article, index) => {
+                    const activeClass = index === 0 ? 'active' : '';
+                    const imgUrl = article.urlToImage || "images/pokopia.png";
+
+                    indicatorsHtml += `
+                        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="${index}"
+                            class="${activeClass}" aria-current="${index === 0 ? 'true' : 'false'}"
+                            aria-label="Slide ${index + 1}"></button>`;
+
+                    carouselHtml += `
+                        <div class="carousel-item ${activeClass}">
+                            <a href="${article.url}" target="_blank">
+                                <img src="${imgUrl}" class="d-block hero-carousel-img" alt="${getSafeText(article.title, 40)}"
+                                    onerror="this.src='images/pokopia.png'">
+                                <div class="hero-caption-bg">
+                                    <div class="container pb-3">
+                                        <h1 class="text-white fw-bold text-shadow d-none d-md-block" style="font-size:2.5rem;">${getSafeText(article.title, 80)}</h1>
+                                        <h3 class="text-white fw-bold text-shadow d-block d-md-none">${getSafeText(article.title, 50)}</h3>
+                                        <p class="text-light fs-5 d-none d-lg-block text-shadow mb-0 w-75">${getSafeText(article.description, 150)}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>`;
+                });
+
+                $('#carousel-inner-content').html(carouselHtml);
+                $('#carousel-indicators-content').html(indicatorsHtml);
+
+                const gridArticles = articles.slice(3, 8);
+                if (gridArticles.length > 0) {
+                    const firstArticle = gridArticles[0];
+                    const bigImg = firstArticle.urlToImage || "images/pokopia.png";
+
+                    $('#news-container').append(`
+                        <div class="col-md-8">
+                            <a href="${firstArticle.url}" target="_blank" class="text-decoration-none">
+                                <div class="news-card big-card text-white h-100 d-flex flex-column justify-content-end p-4 shadow-sm"
+                                    style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%), url('${bigImg}'); min-height:400px; background-size:cover; background-position:center;">
+                                    <h2 class="fw-bold text-shadow">${getSafeText(firstArticle.title, 60)}</h2>
+                                    <p class="fs-5 text-shadow mb-0">${getSafeText(firstArticle.description, 100)}</p>
+                                </div>
+                            </a>
+                        </div>`);
+
+                    let rightColHtml = '<div class="col-md-4 d-flex flex-column gap-3">';
+                    for (let i = 1; i <= 2; i++) {
+                        if (gridArticles[i]) {
+                            const a = gridArticles[i];
+                            const img = a.urlToImage || 'images/champion.png';
+                            rightColHtml += `
+                                <a href="${a.url}" target="_blank" class="text-decoration-none h-50">
+                                    <div class="news-card small-card text-white h-100 d-flex flex-column justify-content-end p-3 shadow-sm"
+                                        style="background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%), url('${img}'); background-size:cover; background-position:center; min-height:192px;">
+                                        <h5 class="fw-bold mb-0 text-shadow fs-6">${getSafeText(a.title, 50)}</h5>
+                                    </div>
+                                </a>`;
+                        }
+                    }
+                    rightColHtml += '</div>';
+                    $('#news-container').append(rightColHtml);
+
+                    if (gridArticles.length > 3) {
+                        let bottomRowHtml = '<div class="row g-3 mt-1 w-100">';
+                        const bgClasses = ['bg-pkmn-pink', 'bg-pkmn-blue', 'bg-pkmn-orange'];
+                        for (let i = 3; i < Math.min(6, gridArticles.length); i++) {
+                            const a = gridArticles[i];
+                            const bgColor = bgClasses[(i - 3) % bgClasses.length];
+                            const hasImage = !!a.urlToImage;
+                            const bgStyle = hasImage
+                                ? `background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%), url('${a.urlToImage}'); background-size:cover; background-position:center;`
+                                : '';
+                            const classAddon = hasImage ? '' : ` ${bgColor}`;
+                            bottomRowHtml += `
+                                <div class="col-md-6">
+                                    <a href="${a.url}" target="_blank" class="text-decoration-none">
+                                        <div class="news-card bottom-card text-white d-flex align-items-end p-3 shadow-sm${classAddon}" style="${bgStyle} min-height:160px;">
+                                            <h5 class="fw-bold mb-0 text-shadow fs-6">${getSafeText(a.title, 45)}</h5>
+                                        </div>
+                                    </a>
+                                </div>`;
+                        }
+                        bottomRowHtml += '</div>';
+                        $('#news-container').append(bottomRowHtml);
+                    }
+                }
+            } else {
+                let appendHtml = '<div class="row g-3 mt-1 w-100">';
+                const bgClasses = ['bg-pkmn-brown', 'bg-pkmn-pink', 'bg-pkmn-blue', 'bg-pkmn-orange'];
+                articles.forEach((a, index) => {
+                    const bgColor = bgClasses[index % bgClasses.length];
+                    const hasImage = !!a.urlToImage;
+                    const bgStyle = hasImage
+                        ? `background-image: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%), url('${a.urlToImage}'); background-size:cover; background-position:center;`
+                        : '';
+                    const classAddon = hasImage ? '' : ` ${bgColor}`;
+                    appendHtml += `
+                        <div class="col-sm-6 col-md-4 col-lg-3 mb-2">
+                            <a href="${a.url}" target="_blank" class="text-decoration-none">
+                                <div class="news-card bottom-card text-white d-flex align-items-end p-3 shadow-sm${classAddon}" style="${bgStyle} min-height:160px;">
+                                    <h5 class="fw-bold mb-0 text-shadow fs-6">${getSafeText(a.title, 45)}</h5>
+                                </div>
+                            </a>
+                        </div>`;
+                });
+                appendHtml += '</div>';
+                const $newContent = $(appendHtml).hide();
+                $('#news-container').append($newContent);
+                $newContent.fadeIn(600);
+            }
+        }
+
+        function loadNewsFromAPI(page = 1, append = false) {
+            if (append) {
+                $('#load-more-news-btn span').removeClass('d-none');
+            }
+
+            const newsApiUrl = `https://gnews.io/api/v4/search?q=pokemon%20tcg&lang=en&max=8&page=${page}&apikey=${newsApiKey}`;
+
+            $.ajax({
+                url: newsApiUrl,
+                method: "GET",
+                success: function (response) {
+                    if (response.articles && response.articles.length > 0) {
+                        const mappedArticles = response.articles.map(article => ({
+                            ...article,
+                            urlToImage: article.image || article.urlToImage
+                        }));
+
+                        renderArticles(mappedArticles, append);
+                        $('#load-more-news-btn').show();
+
+                        if (page >= 2) {
+                            $('#load-more-news-btn').hide();
+                        }
+                    } else {
+                        if (!append) {
+                            console.log("API returned no articles, triggering fallback...");
+                            renderArticles(fallbackArticles, false);
+                            $('#load-more-news-btn').hide();
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    console.log("API call failed, triggering fallback news archive...");
+                    if (!append) {
+                        renderArticles(fallbackArticles, false);
+                        $('#load-more-news-btn').hide();
+                    }
+                },
+                complete: function () {
+                    if (append) $('#load-more-news-btn span').addClass('d-none');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadNewsFromAPI(currentNewsPage, false);
+
+            $('#load-more-news-btn').on('click', function () {
+                currentNewsPage++;
+                loadNewsFromAPI(currentNewsPage, true);
+            });
+        });
+
+        (function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            function initScrollReveal() {
+                document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => observer.observe(el));
+            }
+            initScrollReveal();
+            new MutationObserver(initScrollReveal).observe(document.getElementById('news-container'), { childList: true, subtree: true });
+        })();
+    </script>
+    <script src="js/navbar.js"></script>
+</body>
+
+</html>

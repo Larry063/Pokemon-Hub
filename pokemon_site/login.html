@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon hub</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Specific Styles for Account Pages */
+        .login-page-body {
+            background-color: #ffde00;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            position: relative;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Dark overlay */
+            z-index: -1;
+        }
+
+        /* login-card base design applied to flip fronts and backs */
+        .login-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 4px solid #000000;
+            /* Black outer border */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            /* Keep rounded corners clean */
+        }
+
+        .login-header {
+            background-color: #e3350d;
+            /* Pokemon Red */
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid #222224;
+            /* Pokeball center line */
+            position: relative;
+        }
+
+        /* Create a pseudo-element for the Pokeball button in the middle of the header border */
+        .login-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            /* Half of height */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border: 4px solid #222224;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 4px white, inset 0 0 0 6px #222224;
+            /* Inner ring */
+            z-index: 10;
+        }
+
+        .login-body {
+            padding: 40px 30px 30px;
+            flex-grow: 1;
+            background-color: #fff;
+        }
+
+        .form-control:focus {
+            border-color: #3b4cca;
+            box-shadow: 0 0 0 0.25rem rgba(59, 76, 202, 0.25);
+        }
+
+        .btn-pokemon {
+            background-color: #ffde00;
+            /* Pokemon Yellow */
+            color: #3b4cca;
+            /* Pokemon Blue */
+            font-weight: bold;
+            border: 2px solid #3b4cca;
+            transition: all 0.3s;
+        }
+
+        .btn-pokemon:hover {
+            background-color: #3b4cca;
+            color: #ffde00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(59, 76, 202, 0.3);
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #6c757d;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #e3350d;
+        }
+
+        /* --- FLIP ANIMATION STYLES (From Uiverse, Adapted) --- */
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            margin-top: 20px;
+        }
+
+        /* Hide actual checkbox but maintain functionality via sibling selectors */
+        .toggle {
+            display: none;
+        }
+
+        /* The visual switch container */
+        .switch {
+            position: relative;
+            display: block;
+            width: 60px;
+            height: 30px;
+            margin-bottom: 40px;
+            cursor: pointer;
+        }
+
+        /* Text Labels around switch */
+        .card-side::before {
+            position: absolute;
+            content: 'Log in';
+            left: -80px;
+            top: 2px;
+            width: 60px;
+            text-decoration: underline;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            text-align: right;
+            transition: 0.3s;
+        }
+
+        .card-side::after {
+            position: absolute;
+            content: 'Sign up';
+            left: 70px;
+            /* Offset to clear the slider */
+            top: 2px;
+            width: 80px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .slider {
+            box-sizing: border-box;
+            border-radius: 15px;
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e3350d;
+            /* Red for login */
+            transition: 0.3s;
+        }
+
+        .slider:before {
+            box-sizing: border-box;
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            border: 2px solid white;
+            border-radius: 50%;
+            left: 2px;
+            bottom: 2px;
+            background-color: #ffde00;
+            /* yellow thumb */
+            transition: 0.3s;
+        }
+
+        /* Sibling targeting based on checkbox state */
+        .toggle:checked~.switch .slider {
+            background-color: #3b4cca;
+            /* Blue for signup */
+        }
+
+        .toggle:checked~.switch .slider:before {
+            transform: translateX(30px);
+        }
+
+        .toggle:checked~.switch .card-side:before {
+            text-decoration: none;
+            opacity: 0.7;
+        }
+
+        .toggle:checked~.switch .card-side:after {
+            text-decoration: underline;
+            opacity: 1;
+        }
+
+        /* FLIP CARD CONTAINERS */
+        .flip-card__inner {
+            width: 360px;
+            max-width: 100vw;
+            height: 550px;
+            /* Increased height so both fit perfectly and animation is clean */
+            position: relative;
+            background-color: transparent;
+            perspective: 1000px;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* bounce effect */
+            transform-style: preserve-3d;
+        }
+
+        .toggle:checked~.flip-card__inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card__front,
+        .flip-card__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            /* Remove margins because inner dictates the size */
+            margin: 0;
+        }
+
+        .flip-card__back {
+            transform: rotateY(180deg);
+        }
+
+        @media (max-width: 480px) {
+            .flip-card__inner {
+                width: 340px;
+                height: 550px;
+                /* adjust height for mobile wrapping */
+            }
+
+            .card-side::before {
+                left: -70px;
+                font-size: 1rem;
+            }
+
+            .card-side::after {
+                left: 70px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="login-page-body">
+
+    <!-- Video Background Elements -->
+    <video autoplay muted loop playsinline class="video-background">
+        <source src="videos/login_bg.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+
+    <div class="wrapper">
+        <!-- Hidden Checkbox that controls everything via CSS sibling selectors -->
+        <input type="checkbox" class="toggle" id="flipToggle">
+
+        <!-- The visual switch -->
+        <label class="switch" for="flipToggle">
+            <span class="slider"></span>
+            <span class="card-side"></span>
+        </label>
+
+        <div class="flip-card__inner">
+            <!-- FRONT: LOGIN -->
+            <div class="flip-card__front login-card">
+                <div class="login-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                        alt="Pokémon" height="50" class="mb-2">
+                    <h4 class="fw-bold m-0 text-shadow">Trainer Login</h4>
+                </div>
+
+                <div class="login-body text-start">
+                    <form id="trainerLoginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label fw-bold text-secondary">Trainer Email / ID</label>
+                            <input type="email" class="form-control form-control-lg" id="loginEmail"
+                                placeholder="ash@pallet.town" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="loginPassword" class="form-label fw-bold text-secondary">Password</label>
+                            <input type="password" class="form-control form-control-lg" id="loginPassword"
+                                placeholder="••••••••" required>
+                        </div>
+
+                        <div class="d-grid mb-5 mt-3">
+                            <button type="submit" class="btn btn-pokemon btn-lg">Gotcha!</button>
+                        </div>
+
+                        <div class="text-center mt-auto border-top pt-4">
+                            <a href="index.html" class="back-link d-inline-block">← Return to Pokémon Hub</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- BACK: REGISTER -->
+            <div class="flip-card__back login-card">
+                <div class="login-header" style="background-color: #3b4cca;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                        alt="Pokémon" height="50" class="mb-2">
+                    <h4 class="fw-bold m-0 text-shadow">New Trainer</h4>
+                </div>
+
+                <div class="login-body text-start">
+                    <form id="trainerRegisterForm">
+                        <div class="mb-2">
+                            <label for="regName" class="form-label fw-bold text-secondary mb-1">Trainer Name</label>
+                            <input type="text" class="form-control" id="regName" placeholder="Ash Ketchum" required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="regEmail" class="form-label fw-bold text-secondary mb-1">Email Address</label>
+                            <input type="email" class="form-control" id="regEmail" placeholder="ash@pallet.town"
+                                required>
+                        </div>
+                        <div class="mb-2">
+                            <label for="regPassword" class="form-label fw-bold text-secondary mb-1">Password</label>
+                            <input type="password" class="form-control" id="regPassword" placeholder="••••••••"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="regConfirm" class="form-label fw-bold text-secondary mb-1">Confirm
+                                Password</label>
+                            <input type="password" class="form-control" id="regConfirm" placeholder="••••••••" required>
+                        </div>
+
+                        <div class="d-grid mb-2">
+                            <button type="submit" class="btn btn-pokemon">BEGIN JOURNEY!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple mock login script
+        document.getElementById('trainerLoginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'CATCHING...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Gotcha! Login successful. Welcome back, Trainer!');
+                window.location.href = 'index.html';
+            }, 1000);
+        });
+
+        // Simple mock register script
+        document.getElementById('trainerRegisterForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const password = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+
+            if (password !== confirm) {
+                alert("Passwords don't match! Please try again.");
+                return;
+            }
+
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'REGISTERING IN POKÉDEX...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert('Success! Your Trainer profile has been created. Flipping back to login...');
+                btn.innerText = 'BEGIN JOURNEY!';
+                btn.disabled = false;
+                // auto flip back to login via the checkbox
+                document.getElementById('flipToggle').checked = false;
+            }, 1500);
+        });
+    </script>
+<script src="js/navbar.js"></script>
+</body>
+
+</html>
