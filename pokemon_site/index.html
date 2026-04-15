@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Essential padding to ensure fixed navbar works smoothly */
+        body {
+            padding-top: 0;
+        }
+
+        .dark-meta-block {
+            background: linear-gradient(145deg, rgba(30, 30, 30, 0.8) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        body.dark-mode .dark-meta-block {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(145deg, rgba(20, 20, 20, 0.9) 0%, rgba(5, 5, 5, 0.9) 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(45deg, #ffde00, #ff0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .pokedex-teaser-bg {
+            background: linear-gradient(135deg, rgba(227, 53, 13, 0.85) 0%, rgba(170, 0, 0, 0.85) 100%);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            color: white;
+            position: relative;
+            backdrop-filter: blur(8px);
+        }
+
+        .footer-parallax {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #carousel-inner-content {
+            display: none;
+        }
+
+        /* Styling for the daily discovery cards to ensure consistency */
+        .discovery-card {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .discovery-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="parallax-enabled">
+    <nav class="navbar navbar-expand-lg border-bottom sticky-top global-navbar bg-white" style="z-index: 999;">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                    alt="Pokémon" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pokemonNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pokemonNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pokedex.html">Pokédex</a></li>
+                    <li class="nav-item"><a class="nav-link" href="card_database.html">Card Database</a></li>
+                    <li class="nav-item"><a class="nav-link" href="expansion.html">Expansion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="strategy.html">Strategy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="competitive.html">Competitive</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="login.html" class="btn btn-outline-danger fw-bold rounded-pill px-4">Login</a>
+                    <label class="switch ms-3 mb-0 align-self-center" style="margin-top: 1px;">
+                        <input id="input" type="checkbox" />
+                        <div class="slider round">
+                            <div class="sun-moon">
+                                <svg id="moon-dot-1" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-2" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="moon-dot-3" class="moon-dot" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-1" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-2" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                                <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="50"></circle>
+                                </svg>
+                            </div>
+                            <div class="stars">
+                                <svg id="star-1" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-2" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-3" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                                <svg id="star-4" class="star" viewBox="0 0 20 20">
+                                    <path
+                                        d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="parallax-section" id="section-1">
+        <div class="parallax-overlay parallax-overlay-dark"></div>
+        <div class="parallax-content container position-relative z-index-1"
+            style="height: calc(100vh - 76px); display: flex; align-items: center;">
+            <div class="row align-items-center w-100">
+                <div class="col-lg-8 reveal fade-up">
+                    <h1 class="display-2 fw-bolder text-white mb-4" style="text-shadow: 0 4px 20px rgba(0,0,0,0.8);">
+                        Welcome to the <br><span class="text-gradient">Ultimate Pokémon Hub</span>
+                    </h1>
+                    <p class="lead text-light mb-5 fs-4" style="text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                        Dive into the world of Pokémon. Sign in now to sync your collection, track your favorite cards,
+                        and master the competitive meta.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="pokedex.html"
+                            class="btn btn-danger btn-lg px-5 py-3 fw-bold rounded-pill shadow">Explore Pokédex</a>
+                        <a href="card_database.html"
+                            class="btn btn-outline-light btn-lg px-5 py-3 fw-bold rounded-pill backdrop-blur">Browse
+                            Cards</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 mt-5 mt-lg-0 reveal fade-left delay-2">
+                    <div class="d-flex flex-column gap-4">
+                        <div class="glass-metric p-4 text-white text-center shadow-lg transform-hover">
+                            <h2 class="display-5 fw-bold mb-0">1000+</h2>
+                            <p class="mb-0 fw-medium text-uppercase tracking-wide opacity-80">Pokémon Indexed</p>
+                        </div>
+                        <div class="glass-metric p-4 text-white text-center shadow-lg transform-hover">
+                            <h2 class="display-5 fw-bold mb-0">20k+</h2>
+                            <p class="mb-0 fw-medium text-uppercase tracking-wide opacity-80">TCG Cards Scanned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section" id="section-2">
+        <div class="parallax-overlay parallax-overlay-light"></div>
+        <div class="parallax-content container">
+            <div
+                class="row align-items-center bg-white rounded-5 shadow-lg p-5 reveal fade-up position-relative z-index-1">
+                <div class="col-lg-5 mb-4 mb-lg-0 text-center text-lg-start">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" width="80"
+                        class="mb-4">
+                    <h2 class="display-5 fw-bolder mb-3 text-dark">Retro Pokédex</h2>
+                    <p class="fs-5 text-muted mb-4">
+                        Experience the ultimate interactive Pokédex. Browse through thousands of entries utilizing a
+                        meticulously crafted hardware-accurate retro UI.
+                    </p>
+                    <a href="pokedex.html" class="btn btn-dark btn-lg px-5 rounded-pill shadow-sm">Boot System</a>
+                </div>
+                <div class="col-lg-7">
+                    <div class="pokedex-teaser-bg d-flex justify-content-center align-items-center p-5 reveal scale-in">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                            alt="Pikachu" class="img-fluid drop-shadow"
+                            style="max-height: 400px; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)); transition: transform 0.5s;"
+                            onmouseover="this.style.transform='scale(1.1)'"
+                            onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section" id="section-3">
+        <div class="parallax-overlay parallax-overlay-dark"></div>
+        <div class="parallax-content container py-5 dark-meta-block reveal fade-up">
+            <div class="row align-items-center p-md-4">
+                <div class="col-lg-5 mb-5 mb-lg-0 tilt-perspective d-flex justify-content-center reveal scale-in">
+                    <a href="card_database.html">
+                        <div class="tilt-card" id="hero3DCard" style="width: 280px; height: 390px;">
+                            <img src="https://images.pokemontcg.io/swsh12pt5/160_hires.png" alt="Card"
+                                class="image-cover block" style="width:100%; height:100%;">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-7">
+                    <span class="badge bg-danger fs-6 px-3 py-2 mb-3 rounded-pill shadow">TCG Engine</span>
+                    <h2 class="display-4 fw-bolder mb-4">Master The Collection</h2>
+                    <p class="fs-4 text-light opacity-75 mb-4">
+                        Search through 20,000+ official Pokémon Trading Cards across all 150+ Expansion Sets. Utilize
+                        advanced metrics tailored for the ultimate collector.
+                    </p>
+
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-6">
+                            <div
+                                class="p-4 rounded-4 bg-black bg-opacity-40 border border-secondary border-opacity-25 h-100">
+                                <h4 class="fw-bold fs-3 text-warning">Expansions</h4>
+                                <p class="text-light opacity-75 mb-4">Track completion rates across the newest sets.</p>
+                                <a href="expansion.html" class="text-warning text-decoration-none fw-bold">Explore Sets
+                                    →</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div
+                                class="p-4 rounded-4 bg-black bg-opacity-40 border border-secondary border-opacity-25 h-100">
+                                <h4 class="fw-bold fs-3 text-info">Card Database</h4>
+                                <p class="text-light opacity-75 mb-4">Filter by exact HP, abilities, formatting and
+                                    rarity.</p>
+                                <a href="card_database.html" class="text-info text-decoration-none fw-bold">Open
+                                    Database →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section" id="section-4">
+        <div class="parallax-overlay parallax-overlay-dark"></div>
+        <div class="parallax-content container py-4">
+            <div class="text-center mb-5 reveal fade-up">
+                <h2 class="display-4 fw-bolder text-white" style="text-shadow: 0 4px 10px rgba(0,0,0,0.8);">Train Like A
+                    Champion</h2>
+                <p class="fs-4 text-light opacity-75" style="text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Real-time meta
+                    analysis and upcoming competitive tournament countdowns.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 reveal fade-right">
+                    <div class="card h-100 border-0 shadow-lg rounded-5 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1613771404784-3a5686aa2be3?q=80&w=1000&auto=format&fit=crop"
+                            class="card-img-top" alt="Strategy" style="height: 250px; object-fit: cover;">
+                        <div class="card-body p-5 p-md-5">
+                            <h3 class="fw-bold mb-3 text-dark">Core Strategy</h3>
+                            <p class="text-muted fs-5 mb-4">Learn game-winning mechanics, engine combos, and full deck
+                                lists analyzed by pros.</p>
+                            <a href="strategy.html" class="btn btn-dark fw-bold rounded-pill px-4 shadow">Read
+                                Articles</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 reveal fade-left">
+                    <div class="card h-100 border-0 shadow-lg rounded-5 overflow-hidden text-white"
+                        style="background: rgba(15,23,42,0.95); backdrop-filter: blur(10px);">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop"
+                            class="card-img-top" alt="Competitive"
+                            style="height: 250px; object-fit: cover; opacity: 0.6;">
+                        <div class="card-body p-5 p-md-5 position-relative">
+                            <span
+                                class="position-absolute top-0 end-0 m-4 badge bg-danger p-2 px-3 fs-6 rounded-pill shadow">LIVE
+                                SECONDS</span>
+                            <h3 class="fw-bold mb-3 text-white">Competitive Circuit</h3>
+                            <p class="text-light opacity-75 fs-5 mb-4">Countdown to global championships, regionals, and
+                                local challenge events worldwide.</p>
+                            <a href="competitive.html"
+                                class="btn btn-light text-dark fw-bold rounded-pill px-4 shadow">View Tournaments</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-section position-relative" id="section-5"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 80px; padding-bottom: 0;">
+        <div class="parallax-overlay parallax-overlay-light"></div>
+        <div class="parallax-content container position-relative z-index-1 reveal fade-up">
+            <h2
+                class="display-5 fw-bolder border-bottom border-secondary border-opacity-25 pb-3 mb-4 text-dark shadow-sm px-3 rounded bg-white bg-opacity-50 backdrop-blur w-auto d-inline-block">
+                Daily Discoveries</h2>
+
+            <div class="row g-3 mb-4" id="news-container">
+                <div class="col-12 text-center py-5 text-muted bg-white rounded shadow-sm opacity-75">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2 fw-medium">Loading live Pokémon Hub news...</p>
+                </div>
+            </div>
+
+            <div class="bg-white bg-opacity-75 rounded shadow-sm p-4 backdrop-blur mb-5">
+                <h4 class="fw-bold text-dark mb-4">Random Encounters</h4>
+                <div class="row row-cols-2 row-cols-md-5 g-4" id="pokemon-wrapper">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/script.js"></script>
+    <script src="js/navbar.js"></script>
+
+    <script>
+        // ==========================================
+        // GNews API Integration for Homepage
+        // ==========================================
+        const gnewsApiKeyHome = "0f7810bf9a812f3520f7db1612ea62a4";
+
+        const homeFallbackNews = [
+            {
+                title: "Paradox Destiny: The New TCG Expansion",
+                description: "The Pokémon Company has officially announced 'Paradox Destiny' set.",
+                url: "news.html",
+                image: "https://images.unsplash.com/photo-1620025983804-b26aeb857508?q=80&w=2671&auto=format&fit=crop"
+            },
+            {
+                title: "Global Tournament Finals: Qualifiers",
+                description: "Top trainers from around the world gathered for the Master's Cup.",
+                url: "news.html",
+                image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670&auto=format&fit=crop"
+            },
+            {
+                title: "Rare Charizard Cards in TCG History",
+                description: "Explore the evolution of Charizard in the Trading Card Game.",
+                url: "news.html",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+            }
+        ];
+
+        function renderHomeDiscovery(articles) {
+            const container = $('#news-container');
+            container.empty();
+
+            // Show only the first 3 news items for the home page teaser
+            const teaser = articles.slice(0, 3);
+
+            teaser.forEach(article => {
+                const img = article.image || "images/pokopia.png";
+                const cardHtml = `
+                    <div class="col-md-4">
+                        <div class="card h-100 discovery-card border-0 shadow-sm">
+                            <img src="${img}" class="card-img-top" alt="news" style="height: 200px; object-fit: cover;" onerror="this.src='images/pokopia.png'">
+                            <div class="card-body p-4 bg-white">
+                                <h5 class="fw-bold text-dark mb-2">${article.title.substring(0, 50)}...</h5>
+                                <p class="text-muted small mb-3">${article.description ? article.description.substring(0, 80) : "Latest Pokemon updates..."}...</p>
+                                <a href="${article.url}" target="_blank" class="btn btn-sm btn-outline-danger rounded-pill fw-bold">Read More</a>
+                            </div>
+                        </div>
+                    </div>`;
+                container.append(cardHtml);
+            });
+        }
+
+        function loadDiscoveryNews() {
+            const url = `/api/gnews?q=pokemon%20tcg&lang=en&max=3&apikey=${gnewsApiKeyHome}`;
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function (response) {
+                    if (response.articles && response.articles.length > 0) {
+                        renderHomeDiscovery(response.articles);
+                    } else {
+                        renderHomeDiscovery(homeFallbackNews);
+                    }
+                },
+                error: function () {
+                    console.log("Discovery API failed, using fallback.");
+                    renderHomeDiscovery(homeFallbackNews);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial call for home news
+            loadDiscoveryNews();
+
+            // 1. Intersection Observer for Scroll Reveals
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            document.querySelectorAll('.dark-meta-block').forEach(el => observer.observe(el));
+
+            // 2. 3D Tilt Card Math Logic
+            const card = document.getElementById('hero3DCard');
+            if (card) {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -15;
+                    const rotateY = ((x - centerX) / centerX) * 15;
+
+                    const rx = (x / rect.width) * 100;
+                    const ry = (y / rect.height) * 100;
+
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                    card.style.setProperty('--sheen-x', `${rx}%`);
+                    card.style.setProperty('--sheen-y', `${ry}%`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
